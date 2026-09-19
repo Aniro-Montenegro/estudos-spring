@@ -1,43 +1,25 @@
 package com.montenegrosistemas.produtosapi.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Entity
+@Table(name = "tb_produtos")
 public class Produto {
 
+    @Id
     private String id;
+
     private String nome;
+
     private String descricao;
+
     private Double preco;
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
 
     @Override
     public String toString() {
