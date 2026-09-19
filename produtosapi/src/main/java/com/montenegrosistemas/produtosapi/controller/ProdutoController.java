@@ -4,6 +4,7 @@ import com.montenegrosistemas.produtosapi.model.Produto;
 import com.montenegrosistemas.produtosapi.repositories.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,5 +38,9 @@ public class ProdutoController {
     public void  atualizar(@PathVariable("id") String id, @RequestBody Produto produto){
             produto.setId(id);
             produtoRepository.save(produto);
+    }
+    @GetMapping
+    public List<Produto> buscarPorParametros(@RequestParam("nome")String nome){
+      return  produtoRepository.findByNome(nome);
     }
 }
