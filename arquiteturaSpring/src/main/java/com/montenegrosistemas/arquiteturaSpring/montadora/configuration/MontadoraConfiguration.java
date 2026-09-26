@@ -2,6 +2,9 @@ package com.montenegrosistemas.arquiteturaSpring.montadora.configuration;
 
 import com.montenegrosistemas.arquiteturaSpring.montadora.Motor;
 import com.montenegrosistemas.arquiteturaSpring.montadora.TipoMotor;
+import com.montenegrosistemas.arquiteturaSpring.montadora.api.Aspirado;
+import com.montenegrosistemas.arquiteturaSpring.montadora.api.Eletrico;
+import com.montenegrosistemas.arquiteturaSpring.montadora.api.Turbo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class MontadoraConfiguration {
 
     @Bean(name = "motorAspirado")
+    @Aspirado
     public Motor motorAspirado() {
         var motor = new Motor();
         motor.setCavalos(120);
@@ -20,6 +24,7 @@ public class MontadoraConfiguration {
     }
 
     @Bean(name = "motorEletrico")
+    @Eletrico
     public Motor motorEletrico() {
         var motor = new Motor();
         motor.setCavalos(230);
@@ -31,6 +36,7 @@ public class MontadoraConfiguration {
     }
 
     @Bean(name = "motorTurbo")
+    @Turbo
     public Motor motorTurbo() {
         var motor = new Motor();
         motor.setCavalos(230);
