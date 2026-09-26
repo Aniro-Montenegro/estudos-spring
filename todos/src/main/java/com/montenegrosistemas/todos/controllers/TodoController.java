@@ -4,7 +4,9 @@ package com.montenegrosistemas.todos.controllers;
 import com.montenegrosistemas.todos.domain.TodoEntity;
 import com.montenegrosistemas.todos.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/todos")
@@ -18,20 +20,26 @@ public class TodoController {
     }
 
     @PostMapping
-    public TodoEntity salvar(@RequestBody TodoEntity todo){
-     return this.service.salvar(todo);
+    public TodoEntity salvar(@RequestBody TodoEntity todo) {
+        try {
+            return this.service.salvar(todo);
+        } catch (IllegalArgumentException e) {
+            var mensagem = e.getMessage();
+            throw new ResponseStatusException(HttpStatus.CONFLICT, mensagem);
+
+        }
     }
 
     @PutMapping("{id}")
-    public void satualizarStatus(@PathVariable("id") Integer id, @RequestBody TodoEntity todo){
+    public void satualizarStatus(@PathVariable("id") Integer id, @RequestBody TodoEntity todo) {
         todo.setId(id);
         this.service.atualizar(todo);
     }
 
     @GetMapping("{id}")
-    public TodoEntity buscar(@PathVariable("id")Integer id){
+    public TodoEntity buscar(@PathVariable("id") Integer id) {
 
-      return  this.service.buscarId(id);
+        return this.service.buscarId(id);
 
     }
 }
